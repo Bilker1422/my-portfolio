@@ -1,103 +1,315 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Briefcase, Code, GraduationCap, LayoutGrid, User } from "lucide-react";
+import dynamic from "next/dynamic";
+
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import ContactCard from "@/components/ContactCard";
+import SummaryCard from "@/components/SummaryCard";
+import AboutSection from "@/components/AboutSection";
+import ExperienceSection from "@/components/ExperienceSection";
+import ProjectsSection from "@/components/ProjectsSection";
+import SkillsSection from "@/components/SkillsSection";
+import HeroSection from "@/components/HeroSection";
+
+// Define the structure of the portfolio data
+interface PersonalInfo {
+  name: string;
+  title: string;
+  location: string;
+  phone: string;
+  email: string;
+  summary: string;
+}
+
+interface EducationItem {
+  institution: string;
+  degree: string;
+  period: string;
+  gpa?: string;
+  description?: string;
+  courses?: string[];
+}
+
+interface ExperienceItem {
+  title: string;
+  company: string;
+  period: string;
+  location: string;
+  description: string[];
+  techStack?: string[];
+}
+
+interface ProjectItem {
+  title: string;
+  description: string[];
+  techStack: string[];
+  link: string;
+  github: string; // Added missing github property
+}
+
+interface SkillsData {
+  [category: string]: string[];
+}
+
+interface PortfolioData {
+  personal: PersonalInfo;
+  education: EducationItem[];
+  experience: ExperienceItem[];
+  projects: ProjectItem[];
+  skills: SkillsData;
+}
+
+// Dynamically import components that use browser-only APIs
+// This prevents server/client hydration mismatches
+const AnimatedBackground = dynamic(
+  () => import("@/components/AnimatedBackground"),
+  {
+    ssr: false,
+  }
+);
+
+const BackToTop = dynamic(() => import("@/components/BackToTop"), {
+  ssr: false,
+});
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  // Use the PortfolioData interface for the state type
+  const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(
+    null
+  );
+  const [activeSection, setActiveSection] = useState("about");
+  const [loading, setLoading] = useState(true);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    // In a production app, you would fetch this from an API endpoint
+    const fetchData = async () => {
+      try {
+        // Assuming portfolio.json is correctly imported or fetched
+        const data = await import("@/data/portfolio.json");
+        // Ensure the fetched data matches the PortfolioData structure
+        setPortfolioData(data.default as PortfolioData);
+      } catch (error) {
+        console.error("Failed to load portfolio data:", error);
+        // Handle error state appropriately
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+
+    // Add scroll listener to update active section
+    const handleScroll = () => {
+      const sections = ["home", "about", "experience", "projects", "skills"];
+      const scrollPosition = window.scrollY + 150;
+
+      let currentSection = "about";
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (
+          element &&
+          scrollPosition >= element.offsetTop &&
+          scrollPosition < element.offsetTop + element.offsetHeight
+        ) {
+          currentSection = sectionId;
+          break;
+        }
+        if (
+          window.innerHeight + window.scrollY >=
+          document.body.offsetHeight - 100
+        ) {
+          const lastSectionElement = document.getElementById(
+            sections[sections.length - 1]
+          );
+          if (lastSectionElement)
+            currentSection = sections[sections.length - 1];
+        } else if (window.scrollY < 100) {
+          const firstSectionElement = document.getElementById(sections[0]);
+          if (firstSectionElement) currentSection = sections[0];
+        }
+      }
+      const tabSection = currentSection === "home" ? "about" : currentSection;
+      setActiveSection(tabSection);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <div className="relative animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary mx-auto">
+            <div className="absolute inset-0 rounded-full border-t-2 border-primary/30 opacity-30"></div>
+          </div>
+          <p className="mt-6 text-muted-foreground animate-pulse">
+            Loading portfolio...
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+    );
+  }
+
+  if (!portfolioData) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <p className="text-destructive">Failed to load portfolio data.</p>
+      </div>
+    );
+  }
+
+  const { personal, education, experience, projects, skills } = portfolioData;
+
+  const sections = [
+    { id: "about", label: "About", icon: <User className="h-5 w-5" /> },
+    {
+      id: "experience",
+      label: "Experience",
+      icon: <Briefcase className="h-5 w-5" />,
+    },
+    { id: "projects", label: "Projects", icon: <Code className="h-5 w-5" /> },
+    { id: "skills", label: "Skills", icon: <LayoutGrid className="h-5 w-5" /> },
+    {
+      id: "education",
+      label: "Education",
+      icon: <GraduationCap className="h-5 w-5" />,
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-background relative">
+      <AnimatedBackground />
+      <Header
+        name={personal.name}
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
+      />
+
+      <HeroSection id="home" name={personal.name} title={personal.title} />
+
+      <section className="pt-8 pb-16 px-4 md:px-8">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <ContactCard
+              location={personal.location}
+              phone={personal.phone}
+              email={personal.email}
+            />
+            <SummaryCard summary={personal.summary} />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 px-4 md:px-8" id="content-anchor">
+        <div className="container mx-auto max-w-6xl">
+          <motion.div
+            className="flex overflow-x-auto pb-2 mb-8 scrollbar-hide"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            role="tablist"
+            aria-label="Portfolio sections"
+          >
+            <div className="flex space-x-2 mx-auto bg-card/80 backdrop-blur-sm p-1 rounded-full shadow-md border border-border">
+              {sections.map((section) => (
+                <button
+                  key={section.id}
+                  onClick={() => setActiveSection(section.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === "ArrowRight") {
+                      const currentIndex = sections.findIndex(
+                        (s) => s.id === activeSection
+                      );
+                      const nextIndex = (currentIndex + 1) % sections.length;
+                      setActiveSection(sections[nextIndex].id);
+                    } else if (e.key === "ArrowLeft") {
+                      const currentIndex = sections.findIndex(
+                        (s) => s.id === activeSection
+                      );
+                      const prevIndex =
+                        (currentIndex - 1 + sections.length) % sections.length;
+                      setActiveSection(sections[prevIndex].id);
+                    }
+                  }}
+                  className={`flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                    activeSection === section.id
+                      ? "bg-primary text-primary-foreground shadow-lg border-1 border-primary-foreground/90"
+                      : "text-muted-foreground hover:bg-accent/50 hover:text-accent-foreground"
+                  }`}
+                  role="tab"
+                  tabIndex={activeSection === section.id ? 0 : -1}
+                  aria-selected={activeSection === section.id}
+                  aria-controls={`${section.id}-panel`}
+                  id={`${section.id}-tab`}
+                >
+                  <span className="mr-2" aria-hidden="true">
+                    {section.icon}
+                  </span>
+                  {section.label}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+
+          <div className="mb-16">
+            {activeSection === "about" && (
+              <div
+                role="tabpanel"
+                id="about-panel"
+                aria-labelledby="about-tab"
+                tabIndex={0}
+              >
+                <AboutSection id="about" education={education} />
+              </div>
+            )}
+
+            {activeSection === "experience" && (
+              <div
+                role="tabpanel"
+                id="experience-panel"
+                aria-labelledby="experience-tab"
+                tabIndex={0}
+              >
+                <ExperienceSection id="experience" experiences={experience} />
+              </div>
+            )}
+
+            {activeSection === "projects" && (
+              <div
+                role="tabpanel"
+                id="projects-panel"
+                aria-labelledby="projects-tab"
+                tabIndex={0}
+              >
+                <ProjectsSection id="projects" projects={projects} />
+              </div>
+            )}
+
+            {activeSection === "skills" && (
+              <div
+                role="tabpanel"
+                id="skills-panel"
+                aria-labelledby="skills-tab"
+                tabIndex={0}
+              >
+                <SkillsSection id="skills" skills={skills} />
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+      <BackToTop />
     </div>
   );
 }

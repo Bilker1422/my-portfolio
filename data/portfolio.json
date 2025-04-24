@@ -1,0 +1,103 @@
+{
+  "personal": {
+    "name": "Yahya Mahdali",
+    "title": "Full Stack Developer",
+    "location": "Riyadh",
+    "phone": "+966 549314419",
+    "email": "yahyamdev@gmail.com",
+    "summary": "Full Stack Developer with strong expertise in React.js ecosystem (Redux, Zustand, React Query) and backend technologies (Django, FastAPI). Proficiency in both SQL (PostgreSQL) and NoSQL (DynamoDB) databases. Demonstrated track record of delivering high-impact features in fast-paced environments, focusing on frontend optimization and efficient backend integrations."
+  },
+  "education": [
+    {
+      "institution": "King Faisal University",
+      "degree": "Bachelor of Science in Computer Science",
+      "period": "2019 - 2023",
+      "gpa": "3.8",
+      "description": "Focused on software engineering and web development principles",
+      "courses": [
+        "Data Structures & Algorithms",
+        "Web Development",
+        "Database Systems",
+        "Software Engineering"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "title": "Full Stack Developer",
+      "company": "Scalers",
+      "location": "Riyadh",
+      "period": "Jun 2024 - Present",
+      "description": [
+        "Designed and implemented a job priority system, reducing job processing time by 30%.",
+        "Led the redesign of the job pipeline and job details API, optimizing data flow and cutting API response times by 40%.",
+        "Implemented caching strategies, query parameters, and data prefetching, improving user experience and reducing redundant API calls by 80%."
+      ],
+      "techStack": [
+        "React.js",
+        "Redux",
+        "React Query",
+        "Django",
+        "FastAPI",
+        "AWS",
+        "DynamoDB",
+        "PostgreSQL",
+        "Redis"
+      ]
+    },
+    {
+      "title": "Full Stack Developer",
+      "company": "Freelance",
+      "location": "",
+      "period": "2023 - 2024",
+      "description": [
+        "Delivered custom web solutions for multiple clients using Next.js",
+        "Managed entire project lifecycles from requirement gathering to deployment",
+        "Maintained clear communication channels with clients ensuring project alignment"
+      ],
+      "techStack": ["Next.js", "Firebase"]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Shared Timer",
+      "description": [
+        "Built an asynchronous communication system using Golang & GraphQL.",
+        "Developed a Flutter-based mobile application with an SQLite backend for smooth performance."
+      ],
+      "techStack": ["Golang", "GraphQL", "Flutter", "SQLite"],
+      "link": "#",
+      "github": "#"
+    },
+    {
+      "title": "SemesterPlanX",
+      "description": [
+        "Created a study plan management tool for students using Next.js.",
+        "Integrated real-time updates and task tracking to enhance productivity."
+      ],
+      "techStack": ["Next.js", "React", "Real-time", "Task Tracking"],
+      "link": "#",
+      "github": "#"
+    }
+  ],
+  "skills": {
+    "Frontend Development": [
+      "React.js",
+      "Next.js",
+      "Vue.js",
+      "UI/UX Implementation",
+      "React Query",
+      "Redux",
+      "Zustand"
+    ],
+    "Backend Development": [
+      "Golang",
+      "Django",
+      "GraphQL",
+      "RESTful APIs",
+      "Database Design",
+      "FastAPI"
+    ],
+    "Cloud & Databases": ["DynamoDB", "PostgreSQL", "Redis", "AWS"]
+  }
+}
