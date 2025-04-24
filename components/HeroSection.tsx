@@ -537,8 +537,8 @@ export default function HeroSection({
                           transition: { duration: 2, repeat: Infinity },
                         }}
                       >
-                        &apos;React&apos;, &apos;TypeScript&apos;,
-                        &apos;Next.js&apos;, &apos;UI/UX&apos;
+                        &apos;React&apos;, &apos;Django&apos;,
+                        &apos;FastApi&apos;
                       </motion.span>
                       <span className="text-foreground"> ],</span>
                     </div>
