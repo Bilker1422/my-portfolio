@@ -18,8 +18,8 @@ interface Project {
   title: string;
   description: string[];
   techStack: string[];
-  link: string;
-  github: string;
+  link?: string;
+  github?: string;
 }
 
 export default function ProjectCard({ project }: { project: Project }) {
