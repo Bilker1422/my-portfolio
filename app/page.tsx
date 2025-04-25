@@ -284,49 +284,27 @@ export default function Home() {
           </motion.div>
 
           <div className="mb-16">
-            {activeSection === "about" && (
-              <div
-                role="tabpanel"
-                id="about-panel"
-                aria-labelledby="about-tab"
-                tabIndex={0}
-              >
-                <AboutSection id="about" education={education} />
-              </div>
-            )}
-
-            {activeSection === "experience" && (
-              <div
-                role="tabpanel"
-                id="experience-panel"
-                aria-labelledby="experience-tab"
-                tabIndex={0}
-              >
-                <ExperienceSection id="experience" experiences={experience} />
-              </div>
-            )}
-
-            {activeSection === "projects" && (
-              <div
-                role="tabpanel"
-                id="projects-panel"
-                aria-labelledby="projects-tab"
-                tabIndex={0}
-              >
-                <ProjectsSection id="projects" projects={projects} />
-              </div>
-            )}
-
-            {activeSection === "skills" && (
-              <div
-                role="tabpanel"
-                id="skills-panel"
-                aria-labelledby="skills-tab"
-                tabIndex={0}
-              >
-                <SkillsSection id="skills" skills={skills} />
-              </div>
-            )}
+            {/* Render all sections unconditionally */}
+            <div role="tabpanel" id="about-panel" aria-labelledby="about-tab">
+              <AboutSection id="about" education={education} />
+            </div>
+            <div
+              role="tabpanel"
+              id="experience-panel"
+              aria-labelledby="experience-tab"
+            >
+              <ExperienceSection id="experience" experiences={experience} />
+            </div>
+            <div
+              role="tabpanel"
+              id="projects-panel"
+              aria-labelledby="projects-tab"
+            >
+              <ProjectsSection id="projects" projects={projects} />
+            </div>
+            <div role="tabpanel" id="skills-panel" aria-labelledby="skills-tab">
+              <SkillsSection id="skills" skills={skills} />
+            </div>
           </div>
         </div>
       </section>
