@@ -97,7 +97,7 @@ export default function SummaryCard({ summary }: { summary: string }) {
         <CardContent className="p-6 md:p-8 flex flex-col h-full relative z-20">
           <div className="flex items-center justify-between mb-6">
             <motion.h3
-              className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+              className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text "
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}

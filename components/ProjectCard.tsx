@@ -107,7 +107,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 
         <CardHeader className="pb-3 relative z-20">
           <div className="flex items-start justify-between">
-            <CardTitle className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+            <CardTitle className="text-xl font-bold bg-clip-text bg-gradient-to-r from-primary to-accent">
               {project.title}
             </CardTitle>
             <div className="rounded-full flex items-center justify-center w-9 h-9 bg-accent/30 backdrop-blur-sm">

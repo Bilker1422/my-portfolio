@@ -101,7 +101,7 @@ export default function Header({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
           >
-            <span className="font-bold tracking-tighter mb-3 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <span className="font-bold tracking-tighter mb-3 bg-gradient-to-r from-primary to-accent bg-clip-text ">
               <span className="opacity-80 mr-1">&lt;</span>
               {name}
               <span className="opacity-80 ml-1">/&gt;</span>
@@ -238,7 +238,7 @@ export default function Header({
               <div className="flex justify-between items-center">
                 <motion.a
                   href="#"
-                  className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+                  className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text "
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

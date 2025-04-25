@@ -227,7 +227,7 @@ export default function SkillsSection({ skills, id }: SkillsSectionProps) {
           </motion.div>
 
           <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text text-transparent"
+            className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary via-primary to-secondary bg-clip-text "
             style={{ backgroundSize: "300% 100%" }}
             animate={{
               backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
@@ -318,7 +318,7 @@ export default function SkillsSection({ skills, id }: SkillsSectionProps) {
                   className="text-xl font-semibold mb-6 pb-3 border-b border-border flex items-center"
                   layout
                 >
-                  <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-primary to-accent bg-clip-text ">
                     {category}
                   </span>
                   <motion.span

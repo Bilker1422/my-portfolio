@@ -94,7 +94,7 @@ export default function ContactCard({
             transition={{ delay: 0.1 }}
             className="text-xl font-bold mb-6 text-card-foreground flex items-center"
           >
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text ">
               Contact Information
             </span>
           </motion.h3>
