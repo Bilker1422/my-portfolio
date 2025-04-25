@@ -11,16 +11,19 @@ import { Menu, X, Github, Mail, Download, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useExternalLinkTracking } from "@/lib/useExternalLinkTracking";
+import { scrollToSection } from "@/lib/utils"; // Import the utility function
 
-// Update Header props to accept activeSection and setActiveSection
+// Update Header props to accept setUserHasClicked
 export default function Header({
   name,
   activeSection,
   setActiveSection,
+  setUserHasClicked, // Add this prop
 }: {
   name: string;
   activeSection: string;
   setActiveSection: (section: string) => void;
+  setUserHasClicked: (value: boolean) => void; // Add type definition
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -88,6 +91,35 @@ export default function Header({
     trackExternalLink("download", `resume_${device}`);
   };
 
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string
+  ) => {
+    e.preventDefault();
+    setActiveSection(sectionId);
+    setUserHasClicked(true); // Indicate user click
+    scrollToSection(sectionId); // Use the utility function for scrolling
+  };
+
+  const handleMobileNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string
+  ) => {
+    e.preventDefault();
+    setActiveSection(sectionId);
+    setUserHasClicked(true); // Indicate user click
+
+    // Close the menu first
+    setMobileMenuOpen(false);
+
+    // Delay the scroll slightly to allow the menu to close/animate
+    // Use requestAnimationFrame for better timing with rendering
+    requestAnimationFrame(() => {
+      // Add another small delay if needed, e.g., setTimeout(..., 50)
+      scrollToSection(sectionId); // Use the utility function for scrolling
+    });
+  };
+
   return (
     <>
       <motion.header
@@ -134,15 +166,7 @@ export default function Header({
                     <motion.a
                       key={item.href}
                       href={item.href}
-                      onClick={(e) => {
-                        if (item.href.startsWith("#")) {
-                          e.preventDefault();
-                          setActiveSection(sectionId);
-                          document.getElementById(sectionId)?.scrollIntoView({
-                            behavior: "smooth",
-                          });
-                        }
-                      }}
+                      onClick={(e) => handleNavClick(e, sectionId)} // Use the handler
                       className={`px-4 py-2 rounded-lg relative transition-colors ${
                         activeSection === sectionId
                           ? "text-primary font-medium"
@@ -270,18 +294,7 @@ export default function Header({
                     <motion.a
                       key={item.href}
                       href={item.href}
-                      onClick={(e) => {
-                        if (item.href.startsWith("#")) {
-                          e.preventDefault();
-                          setMobileMenuOpen(false);
-                          setActiveSection(sectionId);
-                          document.getElementById(sectionId)?.scrollIntoView({
-                            behavior: "smooth",
-                          });
-                        } else {
-                          setMobileMenuOpen(false);
-                        }
-                      }}
+                      onClick={(e) => handleMobileNavClick(e, sectionId)} // Use the handler
                       className={`text-lg px-4 py-3 ${
                         activeSection === sectionId
                           ? "bg-accent/50 text-primary font-medium rounded-lg border-l-2 border-primary"

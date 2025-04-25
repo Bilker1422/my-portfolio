@@ -18,7 +18,8 @@ const nextConfig: NextConfig = {
 
   // Optimize CSS and JS bundle sizes
   experimental: {
-    optimizeCss: true, // Uses Critters to inline critical CSS
+    reactCompiler: true,
+    optimizeCss: true,
     optimizePackageImports: ["framer-motion", "lucide-react"],
   },
 };

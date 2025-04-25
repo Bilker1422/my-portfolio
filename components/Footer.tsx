@@ -4,9 +4,37 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { useExternalLinkTracking } from "@/lib/useExternalLinkTracking";
 
-export default function Footer() {
+export default function Footer({
+  setActiveSection,
+}: {
+  setActiveSection?: (section: string) => void;
+}) {
   const currentYear = new Date().getFullYear();
   const trackExternalLink = useExternalLinkTracking();
+
+  // Helper function to handle navigation
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (href.startsWith("#") && setActiveSection) {
+      e.preventDefault();
+      const sectionId = href.replace("#", "");
+
+      // Only set section if it exists (no defaults)
+      if (sectionId) {
+        setActiveSection(sectionId);
+
+        // Only scroll if the element exists
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({
+            behavior: "smooth",
+          });
+        }
+      }
+    }
+  };
 
   const socialLinks = [
     {
@@ -99,14 +127,15 @@ export default function Footer() {
                       <li key={i}>
                         <a
                           href={link.href}
-                          onClick={() =>
+                          onClick={(e) => {
                             link.href.startsWith("#")
-                              ? trackExternalLink(
+                              ? (trackExternalLink(
                                   "navigation",
                                   link.name.toLowerCase()
-                                )
-                              : null
-                          }
+                                ),
+                                handleNavClick(e, link.href))
+                              : null;
+                          }}
                           className="text-sm text-muted-foreground hover:text-primary transition-colors"
                         >
                           {link.name}

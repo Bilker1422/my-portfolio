@@ -20,3 +20,19 @@ export function usePageViewTracking() {
     }
   }, [pathname, searchParams]);
 }
+
+// Helper function to scroll to a section, accounting for fixed header
+export const scrollToSection = (sectionId: string) => {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    // Calculate offset considering potential fixed header height
+    const headerOffset = 80; // Adjust this value based on your actual header height
+    const elementPosition = section.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
+  }
+};

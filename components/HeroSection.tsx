@@ -30,9 +30,19 @@ import {
   SiSqlite,
 } from "react-icons/si";
 
-const scrollToSection = (sectionId: string) => {
+// Update the scrollToSection function to only work with existing elements
+const scrollToSection = (
+  sectionId: string,
+  setActiveSection?: (section: string) => void
+) => {
+  // Check if the element exists first
   const section = document.getElementById(sectionId);
   if (section) {
+    // Only update active section if it exists and setActiveSection is provided
+    if (setActiveSection) {
+      setActiveSection(sectionId);
+    }
+    // Scroll to the section
     section.scrollIntoView({ behavior: "smooth" });
   }
 };
@@ -41,10 +51,12 @@ export default function HeroSection({
   name,
   title,
   id, // Add optional id prop
+  setActiveSection, // Add optional setActiveSection prop
 }: {
   name: string;
   title: string;
   id?: string;
+  setActiveSection?: (section: string) => void;
 }) {
   const parallaxRef = useRef<HTMLDivElement>(null);
 
@@ -438,6 +450,7 @@ export default function HeroSection({
             variants={item}
           >
             <Button
+              onClick={() => scrollToSection("about", setActiveSection)}
               size="lg"
               className="group bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300"
             >
@@ -585,7 +598,7 @@ export default function HeroSection({
           variant="ghost"
           size="icon"
           className="animate-bounce rounded-full glass hover:bg-accent/50 transition-colors duration-300"
-          onClick={() => scrollToSection("about")}
+          onClick={() => scrollToSection("about", setActiveSection)}
         >
           <ArrowDown className="text-primary" />
         </Button>
