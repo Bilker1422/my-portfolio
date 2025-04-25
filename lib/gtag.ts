@@ -1,3 +1,13 @@
+declare global {
+  interface Window {
+    gtag: (
+      type: string,
+      googleAnalyticsId: string,
+      config: Record<string, string | number | undefined>
+    ) => void;
+  }
+}
+
 export const GA_MEASUREMENT_ID = "G-311YCV3QGV";
 
 // Log page views

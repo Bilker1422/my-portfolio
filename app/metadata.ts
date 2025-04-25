@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Professional Portfolio | Yahya Mahdali",
+  metadataBase: new URL("https://mahdali.dev/"),
+  title: "Portfolio | Yahya Mahdali",
   description:
-    "Full-stack developer specializing in modern web applications with React, Next.js, and Node.js",
+    "Full-stack developer specializing in modern web applications with React, Next.js, Django and Node.js",
   keywords: [
     "web developer",
     "full-stack developer",
@@ -18,8 +19,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://your-portfolio-url.com",
-    title: "Professional Portfolio | Yahya Mahdali",
+    url: "https://mahdali.dev/",
+    title: "Portfolio | Yahya Mahdali",
     description: "Full-stack developer specializing in modern web applications",
     siteName: "Yahya Mahdali Portfolio",
     images: [
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Professional Portfolio | Yahya Mahdali",
+    title: "Portfolio | Yahya Mahdali",
     description: "Full-stack developer specializing in modern web applications",
     images: ["/twitter-image.png"],
     creator: "@your_twitter_handle",

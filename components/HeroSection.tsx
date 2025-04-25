@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowDown, Github, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -44,30 +44,24 @@ export default function HeroSection({
 }: {
   name: string;
   title: string;
-  id?: string; // Add optional id prop type
+  id?: string;
 }) {
-  const [mounted, setMounted] = useState(false);
   const parallaxRef = useRef<HTMLDivElement>(null);
 
   // Mouse movement variables for 3D effect
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Smooth spring physics for mouse movement
   const springConfig = { damping: 20, stiffness: 150 };
   const springX = useSpring(mouseX, springConfig);
   const springY = useSpring(mouseY, springConfig);
 
-  // Transform mouse position into rotation values with limits
   const rotateX = useTransform(springY, [-300, 300], [15, -15]);
   const rotateY = useTransform(springX, [-300, 300], [-15, 15]);
 
-  // Gradual text reveal animation
   const words = title.split(" ");
 
   useEffect(() => {
-    setMounted(true);
-
     const handleMouseMove = (e: MouseEvent) => {
       if (parallaxRef.current) {
         const rect = parallaxRef.current.getBoundingClientRect();
