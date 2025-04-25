@@ -14,6 +14,8 @@ import ExperienceSection from "@/components/ExperienceSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import SkillsSection from "@/components/SkillsSection";
 import HeroSection from "@/components/HeroSection";
+import { usePageViewTracking } from "@/lib/utils";
+import { event } from "@/lib/gtag";
 
 // Define the structure of the portfolio data
 interface PersonalInfo {
@@ -77,6 +79,9 @@ const BackToTop = dynamic(() => import("@/components/BackToTop"), {
 });
 
 export default function Home() {
+  // Initialize Google Analytics page view tracking
+  usePageViewTracking();
+
   // Use the PortfolioData interface for the state type
   const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(
     null
@@ -143,6 +148,16 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (activeSection) {
+      event({
+        action: "section_view",
+        category: "engagement",
+        label: `Section: ${activeSection}`,
+      });
+    }
+  }, [activeSection]);
 
   if (loading) {
     return (

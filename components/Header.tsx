@@ -10,6 +10,7 @@ import {
 import { Menu, X, Github, Mail, Download, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useExternalLinkTracking } from "@/lib/useExternalLinkTracking";
 
 // Update Header props to accept activeSection and setActiveSection
 export default function Header({
@@ -23,6 +24,7 @@ export default function Header({
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const trackExternalLink = useExternalLinkTracking();
 
   // Scroll progress for animations
   const { scrollYProgress } = useScroll();
@@ -54,6 +56,11 @@ export default function Header({
     { href: "#projects", label: "Projects" },
     { href: "#skills", label: "Skills" },
   ];
+
+  // Track resume download
+  const handleResumeDownload = (device: string) => {
+    trackExternalLink("download", `resume_${device}`);
+  };
 
   return (
     <motion.header
@@ -156,6 +163,7 @@ export default function Header({
                 className="text-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-accent/50"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackExternalLink("social", "github")}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -164,6 +172,7 @@ export default function Header({
               <motion.a
                 href="mailto:yahyamdev@gmail.com"
                 className="text-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-accent/50"
+                onClick={() => trackExternalLink("contact", "email")}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -177,7 +186,11 @@ export default function Header({
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 }}
             >
-              <a href="full-stack-developer.pdf" download="Yahya Mahdali.pdf">
+              <a
+                href="full-stack-developer.pdf"
+                download="Yahya Mahdali.pdf"
+                onClick={() => handleResumeDownload("desktop")}
+              >
                 <Button
                   size="sm"
                   className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 px-4"
@@ -274,6 +287,7 @@ export default function Header({
                     className="bg-accent/30 p-3 rounded-full text-foreground hover:text-primary hover:bg-accent/50 transition-colors"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackExternalLink("social", "github")}
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -282,6 +296,7 @@ export default function Header({
                   <motion.a
                     href="mailto:yahyamdev@gmail.com"
                     className="bg-accent/30 p-3 rounded-full text-foreground hover:text-primary hover:bg-accent/50 transition-colors"
+                    onClick={() => trackExternalLink("contact", "email")}
                     whileHover={{ scale: 1.1, rotate: -5 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -306,11 +321,12 @@ export default function Header({
                   <a
                     href="full-stack-developer.pdf"
                     download="Yahya Mahdali.pdf"
+                    onClick={() => {
+                      handleResumeDownload("mobile");
+                      setMobileMenuOpen(false);
+                    }}
                   >
-                    <Button
-                      className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 px-8 py-6"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
+                    <Button className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 px-8 py-6">
                       Download Resume <Download size={16} className="ml-2" />
                     </Button>
                   </a>

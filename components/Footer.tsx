@@ -2,9 +2,11 @@
 
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { useExternalLinkTracking } from "@/lib/useExternalLinkTracking";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const trackExternalLink = useExternalLinkTracking();
 
   const socialLinks = [
     {
@@ -14,7 +16,7 @@ export default function Footer() {
     },
     {
       icon: <Linkedin className="h-5 w-5" />,
-      href: "#https://www.linkedin.com/in/yahya-mahdali/",
+      href: "https://www.linkedin.com/in/yahya-mahdali/",
       label: "LinkedIn",
     },
     {
@@ -63,6 +65,9 @@ export default function Footer() {
                     <motion.a
                       key={i}
                       href={link.href}
+                      onClick={() =>
+                        trackExternalLink("social", link.label.toLowerCase())
+                      }
                       className="w-9 h-9 rounded-full flex items-center justify-center border border-border text-foreground hover:bg-primary hover:border-primary hover:text-primary-foreground transition-colors"
                       aria-label={link.label}
                       initial={{ opacity: 0, y: 10 }}
@@ -94,6 +99,14 @@ export default function Footer() {
                       <li key={i}>
                         <a
                           href={link.href}
+                          onClick={() =>
+                            link.href.startsWith("#")
+                              ? trackExternalLink(
+                                  "navigation",
+                                  link.name.toLowerCase()
+                                )
+                              : null
+                          }
                           className="text-sm text-muted-foreground hover:text-primary transition-colors"
                         >
                           {link.name}
@@ -111,6 +124,9 @@ export default function Footer() {
                     <li>
                       <a
                         href="#"
+                        onClick={() =>
+                          trackExternalLink("services", "web-development")
+                        }
                         className="text-sm text-muted-foreground hover:text-primary transition-colors"
                       >
                         Web Development
@@ -119,6 +135,9 @@ export default function Footer() {
                     <li>
                       <a
                         href="#"
+                        onClick={() =>
+                          trackExternalLink("services", "mobile-apps")
+                        }
                         className="text-sm text-muted-foreground hover:text-primary transition-colors"
                       >
                         Mobile Apps
@@ -127,6 +146,9 @@ export default function Footer() {
                     <li>
                       <a
                         href="#"
+                        onClick={() =>
+                          trackExternalLink("services", "ui-ux-design")
+                        }
                         className="text-sm text-muted-foreground hover:text-primary transition-colors"
                       >
                         UI/UX Design
@@ -135,6 +157,9 @@ export default function Footer() {
                     <li>
                       <a
                         href="#"
+                        onClick={() =>
+                          trackExternalLink("services", "consulting")
+                        }
                         className="text-sm text-muted-foreground hover:text-primary transition-colors"
                       >
                         Consulting

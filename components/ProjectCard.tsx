@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useExternalLinkTracking } from "@/lib/useExternalLinkTracking";
 
 interface Project {
   title: string;
@@ -24,6 +25,7 @@ interface Project {
 export default function ProjectCard({ project }: { project: Project }) {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const trackExternalLink = useExternalLinkTracking();
 
   // Mouse position for spotlight effect
   const mouseX = useMotionValue(0);
@@ -52,6 +54,22 @@ export default function ProjectCard({ project }: { project: Project }) {
     mouseY.set(y);
     spotlightX.set(x);
     spotlightY.set(y);
+  };
+
+  const handleProjectLinkClick = () => {
+    trackExternalLink(
+      "project",
+      `demo_${project.title.toLowerCase().replace(/\s+/g, "_")}`
+    );
+    window.open(project.link, "_blank");
+  };
+
+  const handleGithubLinkClick = () => {
+    trackExternalLink(
+      "project",
+      `github_${project.title.toLowerCase().replace(/\s+/g, "_")}`
+    );
+    window.open(project.github, "_blank");
   };
 
   return (
@@ -140,7 +158,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             variant="default"
             size="sm"
             className="flex-1 bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 group"
-            onClick={() => window.open(project.link, "_blank")}
+            onClick={handleProjectLinkClick}
           >
             View Project{" "}
             <ArrowUpRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -149,7 +167,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             variant="outline"
             size="icon"
             className="bg-card/50 backdrop-blur-sm border-border hover:border-primary hover:text-primary transition-all duration-300"
-            onClick={() => window.open(project.github, "_blank")}
+            onClick={handleGithubLinkClick}
           >
             <Github className="h-4 w-4" />
           </Button>

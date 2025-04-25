@@ -12,6 +12,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useExternalLinkTracking } from "@/lib/useExternalLinkTracking";
 
 // Define props type
 interface ContactCardProps {
@@ -26,6 +27,7 @@ export default function ContactCard({
   email,
 }: ContactCardProps) {
   const [copiedItem, setCopiedItem] = useState<string | null>(null);
+  const trackExternalLink = useExternalLinkTracking();
 
   const contactItems = [
     {
@@ -67,6 +69,8 @@ export default function ContactCard({
       await navigator.clipboard.writeText(text);
       setCopiedItem(label);
       setTimeout(() => setCopiedItem(null), 2000);
+
+      trackExternalLink("contact_copy", label.toLowerCase());
     } catch (err) {
       console.error("Failed to copy: ", err);
     }
@@ -141,6 +145,12 @@ export default function ContactCard({
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() =>
+                        trackExternalLink(
+                          "contact_external",
+                          item.label.toLowerCase()
+                        )
+                      }
                       className="w-8 h-8 rounded-full flex items-center justify-center bg-muted/50 hover:bg-accent/50 transition-colors text-muted-foreground hover:text-accent-foreground"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
@@ -169,6 +179,7 @@ export default function ContactCard({
                 href="https://github.com/Bilker1422"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackExternalLink("social", "github")}
                 className="group w-10 h-10 rounded-full bg-gradient-to-br from-muted to-card flex items-center justify-center shadow-lg border border-border hover:border-primary transition-all duration-300"
                 whileHover={{ y: -5, scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -180,6 +191,7 @@ export default function ContactCard({
               </motion.a>
               <motion.a
                 href={`mailto:${email}`}
+                onClick={() => trackExternalLink("contact", "email")}
                 className="group w-10 h-10 rounded-full bg-gradient-to-br from-muted to-card flex items-center justify-center shadow-lg border border-border hover:border-primary transition-all duration-300"
                 whileHover={{ y: -5, scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -191,6 +203,7 @@ export default function ContactCard({
               </motion.a>
               <motion.a
                 href={`tel:${phone.replace(/\s/g, "")}`}
+                onClick={() => trackExternalLink("contact", "phone")}
                 className="group w-10 h-10 rounded-full bg-gradient-to-br from-muted to-card flex items-center justify-center shadow-lg border border-border hover:border-primary transition-all duration-300"
                 whileHover={{ y: -5, scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
