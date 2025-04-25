@@ -22,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark:dark" suppressHydrationWarning>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Theme script to prevent flash of incorrect theme - must be placed at the top */}
         <script
           dangerouslySetInnerHTML={{
