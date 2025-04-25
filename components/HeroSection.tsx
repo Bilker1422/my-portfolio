@@ -450,24 +450,26 @@ export default function HeroSection({
               View my work{" "}
               <ArrowDown className="ml-1 group-hover:translate-y-1 transition-transform" />
             </Button>
-
             <Button
               variant="outline"
               size="lg"
               className="glass border-border hover:border-primary transition-colors duration-300"
+              onClick={() => window.open("https://github.com/Bilker1422")}
             >
               <Github className="mr-1 transition-transform group-hover:scale-110" />
               Github
             </Button>
-
-            <Button
-              variant="outline"
-              size="lg"
-              className="glass border-border hover:border-primary transition-colors duration-300"
-            >
-              <FileText className="mr-1" />
-              Resume
-            </Button>
+            <a href="full-stack-developer.pdf" download="Yahya Mahdali.pdf">
+              <Button
+                variant="outline"
+                size="lg"
+                className="glass border-border hover:border-primary transition-colors duration-300"
+              >
+                <FileText className="mr-1" />
+                Resume
+              </Button>
+            </a>
+            ``
           </motion.div>
         </motion.div>
 

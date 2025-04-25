@@ -136,14 +136,16 @@ export default function SummaryCard({ summary }: { summary: string }) {
               Last updated: April 2025
             </p>
 
-            <Button
-              variant="outline"
-              size="sm"
-              className="group bg-card/50 border-border hover:bg-accent/50 hover:text-accent-foreground transition-all duration-300 backdrop-blur-sm"
-            >
-              <span>Download Resume</span>
-              <Download className="ml-2 h-4 w-4 opacity-70 group-hover:translate-y-0.5 transition-transform" />
-            </Button>
+            <a href="full-stack-developer.pdf" download="Yahya Mahdali.pdf">
+              <Button
+                variant="outline"
+                size="sm"
+                className="group bg-card/50 border-border hover:bg-accent/50 hover:text-accent-foreground transition-all duration-300 backdrop-blur-sm"
+              >
+                <span>Download Resume</span>
+                <Download className="ml-2 h-4 w-4 opacity-70 group-hover:translate-y-0.5 transition-transform" />
+              </Button>
+            </a>
           </motion.div>
         </CardContent>
       </Card>

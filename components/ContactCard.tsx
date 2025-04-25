@@ -54,10 +54,10 @@ export default function ContactCard({
     {
       icon: <Github className="text-primary" />,
       label: "Github",
-      value: "github.com/username",
-      copyValue: "https://github.com/username",
+      value: "github.com/Bilker1422",
+      copyValue: "https://github.com/Bilker1422",
       action: "copy",
-      href: "https://github.com/username",
+      href: "https://github.com/Bilker1422",
       external: true,
     },
   ];
@@ -166,7 +166,7 @@ export default function ContactCard({
             </h4>
             <div className="flex justify-center space-x-3">
               <motion.a
-                href="https://github.com/username"
+                href="https://github.com/Bilker1422"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group w-10 h-10 rounded-full bg-gradient-to-br from-muted to-card flex items-center justify-center shadow-lg border border-border hover:border-primary transition-all duration-300"

@@ -152,7 +152,7 @@ export default function Header({
 
             <div className="flex items-center gap-3 pl-4 border-l border-border">
               <motion.a
-                href="https://github.com/yahyamhd"
+                href="https://github.com/Bilker1422"
                 className="text-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-accent/50"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -177,12 +177,14 @@ export default function Header({
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 }}
             >
-              <Button
-                size="sm"
-                className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 px-4"
-              >
-                Resume <Download size={14} className="ml-2 opacity-80" />
-              </Button>
+              <a href="full-stack-developer.pdf" download="Yahya Mahdali.pdf">
+                <Button
+                  size="sm"
+                  className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 px-4"
+                >
+                  Resume <Download size={14} className="ml-2 opacity-80" />
+                </Button>
+              </a>
             </motion.div>
           </motion.nav>
 
@@ -268,7 +270,7 @@ export default function Header({
 
                 <div className="flex justify-center gap-6 mt-8">
                   <motion.a
-                    href="https://github.com/yahyamhd"
+                    href="https://github.com/Bilker1422"
                     className="bg-accent/30 p-3 rounded-full text-foreground hover:text-primary hover:bg-accent/50 transition-colors"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -301,12 +303,17 @@ export default function Header({
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <Button
-                    className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 px-8 py-6"
-                    onClick={() => setMobileMenuOpen(false)}
+                  <a
+                    href="full-stack-developer.pdf"
+                    download="Yahya Mahdali.pdf"
                   >
-                    Download Resume <Download size={16} className="ml-2" />
-                  </Button>
+                    <Button
+                      className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 px-8 py-6"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Download Resume <Download size={16} className="ml-2" />
+                    </Button>
+                  </a>
                 </motion.div>
               </nav>
             </div>
