@@ -128,13 +128,13 @@ export default function Footer({
                         <a
                           href={link.href}
                           onClick={(e) => {
-                            link.href.startsWith("#")
-                              ? (trackExternalLink(
-                                  "navigation",
-                                  link.name.toLowerCase()
-                                ),
-                                handleNavClick(e, link.href))
-                              : null;
+                            if (link.href.startsWith("#")) {
+                              trackExternalLink(
+                                "navigation",
+                                link.name.toLowerCase()
+                              );
+                              handleNavClick(e, link.href);
+                            }
                           }}
                           className="text-sm text-muted-foreground hover:text-primary transition-colors"
                         >
