@@ -14,15 +14,14 @@ export default function Footer() {
     },
     {
       icon: <Linkedin className="h-5 w-5" />,
-      href: "#linkedin",
+      href: "#https://www.linkedin.com/in/yahya-mahdali/",
       label: "LinkedIn",
     },
     {
-      icon: <Twitter className="h-5 w-5" />,
-      href: "#twitter",
-      label: "Twitter",
+      icon: <Mail className="h-5 w-5" />,
+      href: "mailto:yahyamdev@gmail.com",
+      label: "Email",
     },
-    { icon: <Mail className="h-5 w-5" />, href: "#contact", label: "Email" },
   ];
 
   const footerLinks = [

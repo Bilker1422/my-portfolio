@@ -469,7 +469,6 @@ export default function HeroSection({
                 Resume
               </Button>
             </a>
-            ``
           </motion.div>
         </motion.div>
 
