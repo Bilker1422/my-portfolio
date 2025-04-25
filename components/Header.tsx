@@ -32,14 +32,22 @@ export default function Header({
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const isScrolled = window.scrollY > 20;
+      setScrolled(isScrolled);
+      // Close mobile menu on scroll if it's open
+      if (mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
+    // Initial check in case the page loads scrolled
+    handleScroll();
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [mobileMenuOpen]);
 
   // Define header class based on scroll state
   const getHeaderClass = () => {

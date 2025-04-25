@@ -11,8 +11,7 @@
     {
       "institution": "King Faisal University",
       "degree": "Bachelor of Science in Computer Science",
-      "period": "2019 - 2023",
-      "gpa": "3.8",
+      "period": "2019 - 2024",
       "description": "Focused on software engineering and web development principles",
       "courses": [
         "Data Structures & Algorithms",
@@ -46,6 +45,18 @@
       ]
     },
     {
+      "title": "Technical Consultant",
+      "company": "Dal | دال",
+      "location": "Riyadh",
+      "period": "Jul 2024 - Present",
+      "description": [
+        "Developed internal automations to streamline team workflows and reduce manual tasks.",
+        "Designed and maintained the company website to support visibility and communication.",
+        "Researched, evaluated, and introduced new tools to improve team efficiency and productivity.",
+        "Provided general technical support to help the team operate more smoothly and effectively."
+      ]
+    },
+    {
       "title": "Full Stack Developer",
       "company": "Freelance",
       "location": "",
@@ -66,8 +77,7 @@
         "Developed a Flutter-based mobile application with an SQLite backend for smooth performance."
       ],
       "techStack": ["Golang", "GraphQL", "Flutter", "SQLite"],
-      "link": "#",
-      "github": "#"
+      "features": ["Real-time", "Asynchronous", "Mobile App"]
     },
     {
       "title": "SemesterPlanX",
@@ -75,9 +85,14 @@
         "Created a study plan management tool for students using Next.js.",
         "Integrated real-time updates and task tracking to enhance productivity."
       ],
-      "techStack": ["Next.js", "React", "Real-time", "Task Tracking"],
-      "link": "#",
-      "github": ""
+      "techStack": ["Next.js", "React"],
+      "features": [
+        "Task Tracking",
+        "Real-time Updates",
+        "User-Friendly",
+        "Responsive Design",
+        "Web app"
+      ]
     }
   ],
   "skills": {

@@ -48,8 +48,8 @@ interface ProjectItem {
   title: string;
   description: string[];
   techStack: string[];
-  link: string;
-  github: string; // Added missing github property
+  link?: string;
+  github?: string;
 }
 
 interface SkillsData {
@@ -105,45 +105,57 @@ export default function Home() {
 
     // Add scroll listener to update active section
     const handleScroll = () => {
-      const sections = ["home", "about", "experience", "projects", "skills"];
-      const scrollPosition = window.scrollY + 150;
+      // Use the actual section IDs present in the DOM
+      const sectionIds = ["home", "about", "experience", "projects", "skills"];
+      // Adjust scroll offset for better detection (e.g., 1/3 of viewport height)
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
 
-      let currentSection = "about";
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (
-          element &&
-          scrollPosition >= element.offsetTop &&
-          scrollPosition < element.offsetTop + element.offsetHeight
-        ) {
-          currentSection = sectionId;
+      let currentSectionId = "home"; // Default to home
+
+      // Find the current section based on scroll position
+      // Iterate through sections and find the lowest one whose top is above the scroll position
+      for (const id of sectionIds) {
+        const element = document.getElementById(id);
+        if (element && scrollPosition >= element.offsetTop) {
+          currentSectionId = id; // Update candidate for current section
+        } else {
+          // If the current scroll position is *before* this element's top,
+          // the previous candidate was the correct one.
           break;
         }
-        if (
-          window.innerHeight + window.scrollY >=
-          document.body.offsetHeight - 100
-        ) {
-          const lastSectionElement = document.getElementById(
-            sections[sections.length - 1]
-          );
-          if (lastSectionElement)
-            currentSection = sections[sections.length - 1];
-        } else if (window.scrollY < 100) {
-          const firstSectionElement = document.getElementById(sections[0]);
-          if (firstSectionElement) currentSection = sections[0];
-        }
       }
-      const tabSection = currentSection === "home" ? "about" : currentSection;
-      setActiveSection(tabSection);
+
+      // Handle edge case: If scrolled very close to the bottom, force the last section
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 50
+      ) {
+        // Small threshold
+        currentSectionId = sectionIds[sectionIds.length - 1];
+      }
+
+      // Map 'home' section to 'about' for the tab navigation state
+      const tabSection =
+        currentSectionId === "home" ? "about" : currentSectionId;
+
+      // Only update state if the section actually changed to prevent unnecessary re-renders
+      // Using functional update for safety with state dependencies
+      setActiveSection((prevSection) => {
+        if (prevSection !== tabSection) {
+          return tabSection;
+        }
+        return prevSection;
+      });
     };
 
     window.addEventListener("scroll", handleScroll);
+    // Call handleScroll once initially to set the correct section based on load position
     handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, []); // Keep the empty dependency array, this effect should run once on mount
 
   useEffect(() => {
     if (activeSection) {

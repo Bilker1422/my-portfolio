@@ -154,23 +154,27 @@ export default function ProjectCard({ project }: { project: Project }) {
         </CardContent>
 
         <CardFooter className="flex gap-3 pt-4 relative z-20">
-          <Button
-            variant="default"
-            size="sm"
-            className="flex-1 bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 group"
-            onClick={handleProjectLinkClick}
-          >
-            View Project{" "}
-            <ArrowUpRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="bg-card/50 backdrop-blur-sm border-border hover:border-primary hover:text-primary transition-all duration-300"
-            onClick={handleGithubLinkClick}
-          >
-            <Github className="h-4 w-4" />
-          </Button>
+          {project.link && (
+            <Button
+              variant="default"
+              size="sm"
+              className="flex-1 bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-primary-foreground shadow-md hover:shadow-lg transition-all duration-300 group"
+              onClick={handleProjectLinkClick}
+            >
+              View Project{" "}
+              <ArrowUpRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </Button>
+          )}
+          {project.github && (
+            <Button
+              variant="outline"
+              size="icon"
+              className="bg-card/50 backdrop-blur-sm border-border hover:border-primary hover:text-primary transition-all duration-300"
+              onClick={handleGithubLinkClick}
+            >
+              <Github className="h-4 w-4" />
+            </Button>
+          )}
         </CardFooter>
 
         {/* Interactive hover effect */}
