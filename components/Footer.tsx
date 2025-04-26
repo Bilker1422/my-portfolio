@@ -49,7 +49,7 @@ export default function Footer({
     },
     {
       icon: <Mail className="h-5 w-5" />,
-      href: "mailto:yahyamdev@gmail.com",
+      href: "mailto:yahya@mahdali.dev",
       label: "Email",
     },
   ];
@@ -206,7 +206,7 @@ export default function Footer({
                       Riyadh, Saudi Arabia
                     </li>
                     <li className="text-sm text-muted-foreground">
-                      yahyamdev@gmail.com
+                      yahya@mahdali.dev
                     </li>
                     <li className="text-sm text-muted-foreground">
                       +966 549314419

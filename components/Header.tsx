@@ -208,7 +208,7 @@ export default function Header({
                   <Github size={18} />
                 </motion.a>
                 <motion.a
-                  href="mailto:yahyamdev@gmail.com"
+                  href="mailto:yahya@mahdali.dev"
                   className="text-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-accent/50"
                   onClick={() => trackExternalLink("contact", "email")}
                   whileHover={{ scale: 1.1 }}
@@ -322,7 +322,7 @@ export default function Header({
                     <Github size={20} />
                   </motion.a>
                   <motion.a
-                    href="mailto:yahyamdev@gmail.com"
+                    href="mailto:yahya@mahdali.dev"
                     className="bg-accent/30 p-3 rounded-full text-foreground hover:text-primary hover:bg-accent/50 transition-colors"
                     onClick={() => trackExternalLink("contact", "email")}
                     whileHover={{ scale: 1.1, rotate: -5 }}
