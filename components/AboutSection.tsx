@@ -15,14 +15,12 @@ interface EducationItem {
 
 interface AboutSectionProps {
   education: EducationItem[];
-  certifications: string[];
   id?: string; // Add id prop
 }
 
 export default function AboutSection({
   education,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  certifications, // Destructure certifications prop
+
   id, // Destructure id prop
 }: AboutSectionProps) {
   return (
