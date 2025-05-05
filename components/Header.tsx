@@ -36,6 +36,13 @@ export default function Header({
   const { scrollYProgress } = useScroll();
   const headerOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0.98]);
 
+  // Set default active section to "about" when component mounts
+  useEffect(() => {
+    if (!activeSection) {
+      setActiveSection("about");
+    }
+  }, [activeSection, setActiveSection]);
+
   // Effect for header background based on scroll
   useEffect(() => {
     const handleScroll = () => {
