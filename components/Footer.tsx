@@ -3,6 +3,9 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { useExternalLinkTracking } from "@/lib/useExternalLinkTracking";
+import portfolioData from "@/data/portfolio.json"; // Import portfolio data
+
+const { personal } = portfolioData;
 
 export default function Footer({
   setActiveSection,
@@ -39,17 +42,17 @@ export default function Footer({
   const socialLinks = [
     {
       icon: <Github className="h-5 w-5" />,
-      href: "https://github.com/Bilker1422",
+      href: personal.githubUrl, // Use imported data
       label: "Github",
     },
     {
       icon: <Linkedin className="h-5 w-5" />,
-      href: "https://www.linkedin.com/in/yahya-mahdali/",
+      href: personal.linkedinUrl, // Use imported data
       label: "LinkedIn",
     },
     {
       icon: <Mail className="h-5 w-5" />,
-      href: "mailto:yahya@mahdali.dev",
+      href: `mailto:${personal.email}`, // Use imported data
       label: "Email",
     },
   ];
@@ -81,7 +84,7 @@ export default function Footer({
               >
                 <a href="#" className="inline-block text-xl font-bold mb-4">
                   <span className="text-primary">&lt;</span>
-                  Yahya Mahdali
+                  {personal.name} {/* Use imported data */}
                   <span className="text-primary">/&gt;</span>
                 </a>
                 <p className="text-muted-foreground mb-6 max-w-md">
@@ -203,13 +206,13 @@ export default function Footer({
                   </h3>
                   <ul className="space-y-2">
                     <li className="text-sm text-muted-foreground">
-                      Riyadh, Saudi Arabia
+                      {personal.location} {/* Use imported data */}
                     </li>
                     <li className="text-sm text-muted-foreground">
-                      yahya@mahdali.dev
+                      {personal.email} {/* Use imported data */}
                     </li>
                     <li className="text-sm text-muted-foreground">
-                      +966 549314419
+                      {personal.phone} {/* Use imported data */}
                     </li>
                   </ul>
                 </div>
@@ -225,7 +228,8 @@ export default function Footer({
             className="border-t border-border pt-8 text-center"
           >
             <p className="text-sm text-muted-foreground">
-              © {currentYear} Yahya Mahdali. All rights reserved.
+              © {currentYear} {personal.name}. All rights reserved.{" "}
+              {/* Use imported data */}
             </p>
           </motion.div>
         </div>

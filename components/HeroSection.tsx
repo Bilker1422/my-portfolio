@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowDown, Github, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
-// Add Tooltip imports
 import {
   Tooltip,
   TooltipContent,
@@ -29,6 +28,9 @@ import {
   SiFlutter,
   SiSqlite,
 } from "react-icons/si";
+import portfolioData from "@/data/portfolio.json";
+
+const { personal } = portfolioData;
 
 // Update the scrollToSection function to only work with existing elements
 const scrollToSection = (
@@ -461,12 +463,12 @@ export default function HeroSection({
               variant="outline"
               size="lg"
               className="glass border-border hover:border-primary transition-colors duration-300"
-              onClick={() => window.open("https://github.com/Bilker1422")}
+              onClick={() => window.open(personal.githubUrl)}
             >
               <Github className="mr-1 transition-transform group-hover:scale-110" />
               Github
             </Button>
-            <a href="full-stack-developer.pdf" download="Yahya Mahdali.pdf">
+            <a href={personal.resumeUrl} download={personal.resumeFilename}>
               <Button
                 variant="outline"
                 size="lg"
@@ -544,11 +546,8 @@ export default function HeroSection({
                           opacity: [1, 0.8, 1],
                           transition: { duration: 2, repeat: Infinity },
                         }}
-                      >
-                        &apos;React&apos;, &apos;Django&apos;,
-                        &apos;FastApi&apos;
-                      </motion.span>
-                      <span className="text-foreground"> ],</span>
+                      ></motion.span>
+                      <motion.span className="text-foreground"> ]</motion.span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-secondary-foreground">

@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import portfolioData from "@/data/portfolio.json"; // Import portfolio data
+
+const { personal } = portfolioData;
+const siteUrl = "https://mahdali.dev/"; // Define base URL
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mahdali.dev/"),
-  title: "Portfolio | Yahya Mahdali",
-  description:
-    "Full-stack developer specializing in modern web applications with React, Next.js, Django and Node.js",
+  metadataBase: new URL(siteUrl),
+  title: `Portfolio | ${personal.name}`, // Use imported data
+  description: personal.summary, // Use imported data (or a shorter version if preferred)
   keywords: [
     "web developer",
     "full-stack developer",
@@ -12,32 +15,34 @@ export const metadata: Metadata = {
     "Next.js",
     "portfolio",
     "software engineer",
+    personal.name, // Add name to keywords
   ],
-  authors: [{ name: "Yahya Mahdali" }],
-  creator: "Yahya Mahdali",
-  publisher: "Yahya Mahdali",
+  authors: [{ name: personal.name }], // Use imported data
+  creator: personal.name, // Use imported data
+  publisher: personal.name, // Use imported data
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://mahdali.dev/",
-    title: "Portfolio | Yahya Mahdali",
-    description: "Full-stack developer specializing in modern web applications",
-    siteName: "Yahya Mahdali Portfolio",
+    url: siteUrl,
+    title: `Portfolio | ${personal.name}`, // Use imported data
+    description: personal.summary, // Use imported data
+    siteName: `${personal.name} Portfolio`, // Use imported data
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.png", // Keep relative path for static export
         width: 1200,
         height: 630,
-        alt: "Yahya Mahdali - Developer Portfolio",
+        alt: `${personal.name} - Developer Portfolio`, // Use imported data
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Portfolio | Yahya Mahdali",
-    description: "Full-stack developer specializing in modern web applications",
-    images: ["/twitter-image.png"],
-    creator: "@your_twitter_handle",
+    title: `Portfolio | ${personal.name}`, // Use imported data
+    description: personal.summary, // Use imported data
+    images: ["/twitter-image.png"], // Keep relative path
+    // Consider adding twitter handle to portfolio.json if desired
+    // creator: personal.twitterHandle || "@your_default_handle",
   },
   robots: {
     index: true,

@@ -17,10 +17,7 @@ export default function JsonLd() {
       addressLocality: personal.location,
     },
     url: "https://mahdali.dev/",
-    sameAs: [
-      "https://github.com/Bilker1422",
-      "https://www.linkedin.com/in/yahya-mahdali/",
-    ],
+    sameAs: [personal.githubUrl, personal.linkedinUrl],
   };
 
   return (

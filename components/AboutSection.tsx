@@ -4,23 +4,24 @@ import { motion } from "framer-motion";
 import { GraduationCap, Award, BookOpen, Calendar } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
-// Define the Education type
 interface EducationItem {
   institution: string;
   degree: string;
   period: string;
-  gpa?: string; // Optional GPA
-  description?: string; // Optional description
-  courses?: string[]; // Optional courses
+  gpa?: string;
+  description?: string;
+  courses?: string[];
 }
 
 interface AboutSectionProps {
   education: EducationItem[];
+  certifications: string[];
   id?: string; // Add id prop
 }
 
 export default function AboutSection({
   education,
+  certifications, // Destructure certifications prop
   id, // Destructure id prop
 }: AboutSectionProps) {
   return (
@@ -124,7 +125,7 @@ export default function AboutSection({
           ))}
         </motion.div>
 
-        <motion.div
+        {/* <motion.div
           className="mt-12 bg-card/70 backdrop-blur-sm rounded-xl p-6 border border-border shadow-md relative overflow-hidden hover:shadow-lg transition-all duration-300"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -139,12 +140,7 @@ export default function AboutSection({
           </h3>
 
           <ul className="space-y-3">
-            {[
-              "AWS Certified Solutions Architect - Associate",
-              "Google Professional Cloud Developer",
-              "Microsoft Certified: Azure Developer Associate",
-              "Received Dean's List recognition for academic excellence",
-            ].map((cert, idx) => (
+            {certifications.map((cert, idx) => (
               <motion.li
                 key={idx}
                 className="flex items-start gap-2"
@@ -158,7 +154,7 @@ export default function AboutSection({
               </motion.li>
             ))}
           </ul>
-        </motion.div>
+        </motion.div> */}
       </div>
     </div>
   );

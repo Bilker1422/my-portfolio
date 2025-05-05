@@ -12,6 +12,9 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useExternalLinkTracking } from "@/lib/useExternalLinkTracking";
 import { scrollToSection } from "@/lib/utils"; // Import the utility function
+import portfolioData from "@/data/portfolio.json"; // Import portfolio data
+
+const { personal } = portfolioData;
 
 // Update Header props to accept setUserHasClicked
 export default function Header({
@@ -197,7 +200,7 @@ export default function Header({
 
               <div className="flex items-center gap-3 pl-4 border-l border-border">
                 <motion.a
-                  href="https://github.com/Bilker1422"
+                  href={personal.githubUrl} // Use imported data
                   className="text-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-accent/50"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -208,7 +211,7 @@ export default function Header({
                   <Github size={18} />
                 </motion.a>
                 <motion.a
-                  href="mailto:yahya@mahdali.dev"
+                  href={`mailto:${personal.email}`} // Use imported data
                   className="text-foreground hover:text-primary transition-colors p-2 rounded-full hover:bg-accent/50"
                   onClick={() => trackExternalLink("contact", "email")}
                   whileHover={{ scale: 1.1 }}
@@ -225,8 +228,8 @@ export default function Header({
                 transition={{ delay: 0.6 }}
               >
                 <a
-                  href="full-stack-developer.pdf"
-                  download="Yahya Mahdali.pdf"
+                  href={personal.resumeUrl} // Use imported data
+                  download={personal.resumeFilename} // Use imported data
                   onClick={() => handleResumeDownload("desktop")}
                 >
                   <Button
@@ -311,7 +314,7 @@ export default function Header({
 
                 <div className="flex justify-center gap-6 mt-8">
                   <motion.a
-                    href="https://github.com/Bilker1422"
+                    href={personal.githubUrl} // Use imported data
                     className="bg-accent/30 p-3 rounded-full text-foreground hover:text-primary hover:bg-accent/50 transition-colors"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -322,7 +325,7 @@ export default function Header({
                     <Github size={20} />
                   </motion.a>
                   <motion.a
-                    href="mailto:yahya@mahdali.dev"
+                    href={`mailto:${personal.email}`} // Use imported data
                     className="bg-accent/30 p-3 rounded-full text-foreground hover:text-primary hover:bg-accent/50 transition-colors"
                     onClick={() => trackExternalLink("contact", "email")}
                     whileHover={{ scale: 1.1, rotate: -5 }}
@@ -347,8 +350,8 @@ export default function Header({
                   transition={{ delay: 0.6 }}
                 >
                   <a
-                    href="full-stack-developer.pdf"
-                    download="Yahya Mahdali.pdf"
+                    href={personal.resumeUrl} // Use imported data
+                    download={personal.resumeFilename} // Use imported data
                     onClick={() => {
                       handleResumeDownload("mobile");
                       setMobileMenuOpen(false);

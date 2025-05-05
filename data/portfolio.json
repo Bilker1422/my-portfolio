@@ -4,8 +4,18 @@
     "title": "Full Stack Developer",
     "location": "Riyadh",
     "phone": "+966 549314419",
-    "email": "yahyamdev@gmail.com",
-    "summary": "Full Stack Developer with strong expertise in React.js ecosystem (Redux, Zustand, React Query) and backend technologies (Django, FastAPI). Proficiency in both SQL (PostgreSQL) and NoSQL (DynamoDB) databases. Demonstrated track record of delivering high-impact features in fast-paced environments, focusing on frontend optimization and efficient backend integrations."
+    "email": "yahya@mahdali.dev",
+    "githubUrl": "https://github.com/Bilker1422",
+    "linkedinUrl": "https://www.linkedin.com/in/yahya-mahdali/",
+    "resumeUrl": "full-stack-developer.pdf",
+    "resumeFilename": "Yahya Mahdali.pdf",
+    "summary": "Full Stack Developer with strong expertise in React.js ecosystem (Redux, Zustand, React Query) and backend technologies (Django, FastAPI). Proficiency in both SQL (PostgreSQL) and NoSQL (DynamoDB) databases. Demonstrated track record of delivering high-impact features in fast-paced environments, focusing on frontend optimization and efficient backend integrations.",
+    "certifications": [
+      "AWS Certified Solutions Architect - Associate",
+      "Google Professional Cloud Developer",
+      "Microsoft Certified: Azure Developer Associate",
+      "Received Dean's List recognition for academic excellence"
+    ]
   },
   "education": [
     {

@@ -13,6 +13,9 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useExternalLinkTracking } from "@/lib/useExternalLinkTracking";
+import portfolioData from "@/data/portfolio.json"; // Import portfolio data
+
+const { personal } = portfolioData;
 
 // Define props type
 interface ContactCardProps {
@@ -56,10 +59,10 @@ export default function ContactCard({
     {
       icon: <Github className="text-primary" />,
       label: "Github",
-      value: "github.com/Bilker1422",
-      copyValue: "https://github.com/Bilker1422",
+      value: personal.githubUrl.replace("https://", ""), // Use imported data
+      copyValue: personal.githubUrl, // Use imported data
       action: "copy",
-      href: "https://github.com/Bilker1422",
+      href: personal.githubUrl, // Use imported data
       external: true,
     },
   ];
@@ -176,7 +179,7 @@ export default function ContactCard({
             </h4>
             <div className="flex justify-center space-x-3">
               <motion.a
-                href="https://github.com/Bilker1422"
+                href={personal.githubUrl} // Use imported data
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackExternalLink("social", "github")}
