@@ -21,6 +21,7 @@ interface AboutSectionProps {
 
 export default function AboutSection({
   education,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   certifications, // Destructure certifications prop
   id, // Destructure id prop
 }: AboutSectionProps) {
